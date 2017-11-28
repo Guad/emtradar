@@ -1,0 +1,5 @@
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap
+--output-path=obj\Release\netcoreapp2.0\
+--application-name=MadridBusMap
+--content-root=A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap
+--file=

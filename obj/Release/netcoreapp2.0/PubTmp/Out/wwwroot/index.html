@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLb-yziXQ7Q7MF2fiZhDQpmrKXpmSDodY"></script>
+    <script src="js/fermata.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="floater">
+        <div class="wrapper">
+        <h1 class="header">EMTRadar</h1>
+        <input type="text" id="buslineSelection" placeholder="Linea de bus" value="143"/>
+        <input type="button" onclick="clickButten();" value="Go"/>
+    </div>
+</div>
+<div id="googleMap"></div>
+
+<script>ready();</script>
+</body>
+</html>

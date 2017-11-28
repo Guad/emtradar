@@ -1,0 +1,11 @@
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\bin\Release\netcoreapp2.0\MadridBusMap.deps.json
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\bin\Release\netcoreapp2.0\MadridBusMap.runtimeconfig.json
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\bin\Release\netcoreapp2.0\MadridBusMap.runtimeconfig.dev.json
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\bin\Release\netcoreapp2.0\MadridBusMap.dll
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\bin\Release\netcoreapp2.0\MadridBusMap.pdb
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\obj\Release\netcoreapp2.0\MadridBusMap.csproj.CoreCompileInputs.cache
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\obj\Release\netcoreapp2.0\MadridBusMap.AssemblyInfoInputs.cache
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\obj\Release\netcoreapp2.0\MadridBusMap.AssemblyInfo.cs
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\obj\Release\netcoreapp2.0\MadridBusMap.dll
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\obj\Release\netcoreapp2.0\MadridBusMap.pdb
+A:\Dropbox\stuff\Programming\ASP.NET\MadridBusMap\obj\Release\netcoreapp2.0\MadridBusMap.csprojResolveAssemblyReference.cache
