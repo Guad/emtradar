@@ -33,7 +33,7 @@ interface IBusData {
     latitude: number,
     longitude: number,
 
-
+    lastUpdate?: number;
     marker?: google.maps.Marker & { data: any };
 }
 
@@ -53,40 +53,45 @@ function createMap() : void {
 
 function clickButten() {
     var inp: any = document.getElementById('buslineSelection');
-    var parada:number = Number(inp.value);
-    startBusMonitor(parada);
+    startBusMonitor(inp.value);
 }
 
-function startBusMonitor(linea: number) {
+function clearBus(bus: IBusData): void {
+    if (bus.marker.data.info)
+        bus.marker.data.info.close();
+    if (bus.marker.data.anim)
+        clearInterval(bus.marker.data.anim);
+
+    bus.marker.setMap(null);
+}
+
+function startBusMonitor(linea: string) {
     if (mainInterval) {
         clearInterval(mainInterval);
 
         for (var bus in busesDict) {
-            if (busesDict[bus].marker.data.info)
-                busesDict[bus].marker.data.info.close();
-            if (busesDict[bus].marker.data.anim)
-                clearInterval(busesDict[bus].marker.data.anim);
-
-            busesDict[bus].marker.setMap(null);
+            clearBus(busesDict[bus]);
         }
 
         busesDict = {};
     }
 
-    mainFriendlyName = linea.toString();
-
-    api.bus.line2label(linea).get((err, data) => {
-        if (data.found)
-            mainFriendlyName = data.value;
+    mainFriendlyName = linea;
+    api.bus.label2line(linea).get((err, data) => {
+        if (data.found) {
+            mainInterval = setInterval(ponerBusesDeLinea, updateRate, linea);
+            ponerBusesDeLinea(data.value);            
+        } else {
+            var linN: number = Number(linea);
+            mainInterval = setInterval(ponerBusesDeLinea, updateRate, linN);
+            ponerBusesDeLinea(linN);            
+        }
     });
 
-    mainInterval = setInterval(ponerBusesDeLinea, updateRate, linea);
-    ponerBusesDeLinea(linea);
 }
 
 function ponerBusesDeLinea(linea: number): void {
     api.bus.paradas(linea).get((err, data) => {
-
         for (var i = 0; i < data.length; i++) {
             var lin: IParada = data[i];
             api.bus(lin.id).get((err, data) => {
@@ -106,18 +111,27 @@ function ponerBusesDeLinea(linea: number): void {
                             'Linea: ' +
                             bus.lineId +
                             '<br>' +
-                            'Dist Left: ' +
-                            bus.busDistance +
-                            'm<br>' +
                             'Destino: ' +
                             bus.destination);
                     } else {
                         startAnimation(busesDict[bus.busId].marker, new google.maps.LatLng(bus.latitude, bus.longitude));
                     }
+
+                    busesDict[bus.busId].lastUpdate = new Date().getTime();
                 }
             });
         }
     });
+
+    for (var key in busesDict) {
+        if (busesDict.hasOwnProperty(key)) {
+            if (busesDict[key].lastUpdate && new Date().getTime() - busesDict[key].lastUpdate > 60000)
+            {
+                clearBus(busesDict[key]);
+                delete busesDict[key];
+            }
+        }
+    }
 }
 
 function startAnimation(marker: google.maps.Marker & { data: any }, destination: google.maps.LatLng): void {
